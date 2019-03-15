@@ -1,0 +1,35 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Description": "launch instance Amazon Linux and instance type keyName",
+	"Parameters": {
+	    "TypeParameter": {
+		    "Type": "String",
+			"Default": "t3.nano",
+			"Description": "Enter Instance Type Here"
+		}
+	},
+    "Resources": {
+        "EC2Instance": {
+            "Type": "AWS::EC2::Instance",
+            "Properties": {
+                "ImageId": "ami-0889b8a448de4fc44",
+                "InstanceType": {"Ref": "TypeParameter"},
+                "KeyName": "cent",
+                "SecurityGroupIds": ["sg-014299fefb8133853"]
+			}
+        },		
+		"MyEIP": {
+            "Type": "AWS::EC2::EIP",
+            "Properties": {
+                "InstanceId": {"Ref": "EC2Instance"}	
+            }
+            
+        }
+        
+    }
+    
+}
+ 
+
+
+
